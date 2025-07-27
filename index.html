@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBKRIST Student Services - Print & Binding</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>NBKRIST Student Services</h1>
+            <p>Print, Bind & Deliver - Made Easy for Students</p>
+        </header>
+
+        <div class="form-wrapper">
+            <form id="orderForm" class="order-form">
+                <!-- Personal Details Section -->
+                <div class="form-section">
+                    <h3>Personal Details</h3>
+                    
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name *</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            class="form-control" 
+                            required
+                            placeholder="Enter your full name"
+                        >
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="whatsapp" class="form-label">WhatsApp Number *</label>
+                        <input 
+                            type="tel" 
+                            id="whatsapp" 
+                            name="whatsapp" 
+                            class="form-control" 
+                            required
+                            pattern="[6-9][0-9]{9}"
+                            placeholder="Enter 10-digit mobile number"
+                        >
+                        <div class="error-message" id="whatsappError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="form-label">Delivery Address *</label>
+                        <select id="address" name="address" class="form-control" required>
+                            <option value="">Select delivery location</option>
+                            <option value="Pickup">Pickup</option>
+                            <option value="Hostel A">Hostel A</option>
+                            <option value="Hostel B">Hostel B</option>
+                            <option value="Hostel C">Hostel C</option>
+                        </select>
+                        <div class="error-message" id="addressError"></div>
+                    </div>
+                </div>
+
+                <!-- Order Details Section -->
+                <div class="form-section">
+                    <h3>Order Details</h3>
+                    
+                    <div class="form-group">
+                        <label for="pages" class="form-label">Number of Pages *</label>
+                        <input 
+                            type="number" 
+                            id="pages" 
+                            name="pages" 
+                            class="form-control" 
+                            required
+                            min="1"
+                            max="1000"
+                            placeholder="Enter number of pages"
+                        >
+                        <div class="error-message" id="pagesError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fileLink" class="form-label">Google Drive Link or File Upload</label>
+                        <input 
+                            type="text" 
+                            id="fileLink" 
+                            name="fileLink" 
+                            class="form-control" 
+                            placeholder="Paste Google Drive link here or upload file below"
+                        >
+                        <div class="file-upload-wrapper">
+                            <input 
+                                type="file" 
+                                id="fileUpload" 
+                                name="fileUpload" 
+                                class="file-input"
+                                accept=".pdf,.doc,.docx,.ppt,.pptx,.txt"
+                            >
+                            <label for="fileUpload" class="file-upload-label">
+                                <span class="file-upload-text">Choose File</span>
+                            </label>
+                        </div>
+                        <div class="file-info" id="fileInfo"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Order Type *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input 
+                                    type="radio" 
+                                    id="softCopy" 
+                                    name="orderType" 
+                                    value="Soft Copy Printout"
+                                    checked
+                                >
+                                <label for="softCopy">Soft Copy Printout (Digital file provided)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input 
+                                    type="radio" 
+                                    id="hardCopy" 
+                                    name="orderType" 
+                                    value="Hard Copy Submission"
+                                >
+                                <label for="hardCopy">Hard Copy Submission (Physical file provided)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Services Section -->
+                <div class="form-section">
+                    <h3>Additional Services</h3>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input 
+                                type="checkbox" 
+                                id="spiralBinding" 
+                                name="spiralBinding"
+                            >
+                            <label for="spiralBinding">
+                                <span class="checkbox-text">Spiral Binding</span>
+                                <span class="pricing-info">(₹10 for ≤50 pages, ₹20 for >50 pages)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input 
+                                type="checkbox" 
+                                id="urgentDelivery" 
+                                name="urgentDelivery"
+                            >
+                            <label for="urgentDelivery">
+                                <span class="checkbox-text">Urgent Delivery</span>
+                                <span class="pricing-info">(+₹2)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="accessories" class="form-label">Accessories (Optional)</label>
+                        <textarea 
+                            id="accessories" 
+                            name="accessories" 
+                            class="form-control" 
+                            rows="3"
+                            placeholder="Any additional items needed (pen, notebook, etc.) - MRP will apply"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Cost Calculator Section -->
+                <div class="cost-section">
+                    <h3>Order Summary</h3>
+                    <div class="cost-breakdown">
+                        <div class="cost-item">
+                            <span>Pages (<span id="pagesCount">0</span> × ₹3)</span>
+                            <span class="cost-value">₹<span id="pagesCost">0</span></span>
+                        </div>
+                        <div class="cost-item" id="spiralCostItem" style="display: none;">
+                            <span>Spiral Binding</span>
+                            <span class="cost-value">₹<span id="spiralCost">0</span></span>
+                        </div>
+                        <div class="cost-item" id="urgentCostItem" style="display: none;">
+                            <span>Urgent Delivery</span>
+                            <span class="cost-value">₹<span id="urgentCost">2</span></span>
+                        </div>
+                        <div class="cost-total">
+                            <span>Total Amount</span>
+                            <span class="total-value">₹<span id="totalCost">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <button type="submit" class="btn btn--primary btn--full-width" id="submitBtn">
+                        <span class="btn-text">Place Order</span>
+                        <span class="btn-loading" style="display: none;">
+                            <span class="spinner"></span>
+                            Processing...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-modal hidden">
+            <div class="modal-content">
+                <div class="success-icon">✅</div>
+                <h3>Order Submitted Successfully!</h3>
+                <p>Your order has been received. You will be redirected to WhatsApp to confirm your file sharing.</p>
+                <button id="whatsappBtn" class="btn btn--primary">Continue to WhatsApp</button>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-modal hidden">
+            <div class="modal-content">
+                <div class="error-icon">❌</div>
+                <h3>Submission Failed</h3>
+                <p id="errorText">Something went wrong. Please try again.</p>
+                <button id="retryBtn" class="btn btn--primary">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
